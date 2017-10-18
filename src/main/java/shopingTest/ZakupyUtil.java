@@ -7,6 +7,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ZakupyUtil {
@@ -97,7 +98,7 @@ public class ZakupyUtil {
 	}
 	
 	public static double cenaProduktuPierwszegoWKoszyku(WebDriver driver) {
-		WebElement sumaProduktowWKoszyku = driver.findElement(By.xpath("//*[@id=\"product_price_1_1_31337\"]/span"));
+		WebElement sumaProduktowWKoszyku = driver.findElement(By.xpath("//*[@id=\"product_price_2_7_31337\"]/span"));
 		String suma = sumaProduktowWKoszyku.getText();
 		return Double.parseDouble(suma.substring(1));
 	}
@@ -119,5 +120,53 @@ public class ZakupyUtil {
 	    return suma;
 	}
 	
+	public static void wybranieProduktu(WebDriver driver) {
+		WebElement openProduct = driver
+				.findElement(By.xpath("//*[@id=\"center_column\"]/ul/li[2]/div/div[1]/div/a[1]/img"));
+		openProduct.click();
+	}
+
+	public static void klikniecieDrugiejSztukiProduktu(WebDriver driver) {
+		WebElement addProduct = driver
+				.findElement(By.xpath("//*[@id=\"cart_quantity_up_2_7_0_31337\"]/span"));
+		addProduct.click();
+	}
+	
+	public static int liczbaProduktowWKoszyku (WebDriver driver) {
+		WebElement iloscSztuk = driver
+				.findElement(By.xpath("//*[@id=\"product_2_7_0_31337\"]/td[5]/input[1]"));
+		String text = iloscSztuk.getAttribute("value");
+		return Integer.parseInt(text);
+		
+	}
+	
+	public static double cenaJednegoProduktu(WebDriver driver) {
+		WebElement costOfOneProduct = driver
+				.findElement(By.xpath("//*[@id=\"product_price_2_7_31337\"]/span"));
+		String cena = costOfOneProduct.getText().substring(1);
+		return Double.parseDouble(cena);
+	}
+	
+	public static void ustawComboNaLowestFirst(WebDriver driver) {
+		WebElement combo = driver.findElement(By.xpath("//*[@id=\"selectProductSort\"]"));
+		Select listaRozwijana = new Select(combo);
+		listaRozwijana.selectByVisibleText("Price: Lowest first");
+		
+	}
+	
+	public static void wybranieProduktu2(WebDriver driver) {
+		WebElement openProduct = driver
+				.findElement(By.xpath("//*[@id=\"center_column\"]/ul/li[1]/div/div[1]/div/a[1]/img"));
+		openProduct.click();
+	}
+	
+	public static String printedChiffonDress(WebDriver driver) {
+		WebElement nazwa = driver.findElement(By.xpath("//*[@id=\"center_column\"]/div/div/div[3]/h1"));
+		String nazwa2 = nazwa.getText();
+		return nazwa2;
+		
+		
+				
+	}
 	
 }
